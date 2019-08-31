@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>vim不正常退出的swp文件处理方法 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Vim编辑器编辑文件，文件发生改变但未正常保存（断电，掉线）的时候，系统会生成保存当时更改的swp文件  使用Vim编辑器编辑文件，文件发生改变但未正常保存（断电，掉线）的时候，linux系统会自动帮你保存一定的更改”以防不测“（这点设计的挺好的）的swp文件，其他产生swp文件的场景：   非正常退出 当你用多个程序或进程编辑同一文件时（多人同时使用服务器编辑同一个文件）  生成的swp文件属于">
+<meta name="keywords" content="Linux  Vim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim不正常退出的swp文件处理方法">
+<meta property="og:url" content="http://yoursite.com/2019/08/30/vim不正常退出的swp文件处理方法/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Vim编辑器编辑文件，文件发生改变但未正常保存（断电，掉线）的时候，系统会生成保存当时更改的swp文件  使用Vim编辑器编辑文件，文件发生改变但未正常保存（断电，掉线）的时候，linux系统会自动帮你保存一定的更改”以防不测“（这点设计的挺好的）的swp文件，其他产生swp文件的场景：   非正常退出 当你用多个程序或进程编辑同一文件时（多人同时使用服务器编辑同一个文件）  生成的swp文件属于">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="c:%5CUsers%5C24186%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567215306227.png">
+<meta property="og:image" content="c:%5CUsers%5C24186%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567215499798.png">
+<meta property="og:image" content="c:%5CUsers%5C24186%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567215520970.png">
+<meta property="og:updated_time" content="2019-08-31T02:34:38.211Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vim不正常退出的swp文件处理方法">
+<meta name="twitter:description" content="Vim编辑器编辑文件，文件发生改变但未正常保存（断电，掉线）的时候，系统会生成保存当时更改的swp文件  使用Vim编辑器编辑文件，文件发生改变但未正常保存（断电，掉线）的时候，linux系统会自动帮你保存一定的更改”以防不测“（这点设计的挺好的）的swp文件，其他产生swp文件的场景：   非正常退出 当你用多个程序或进程编辑同一文件时（多人同时使用服务器编辑同一个文件）  生成的swp文件属于">
+<meta name="twitter:image" content="c:%5CUsers%5C24186%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567215306227.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vim不正常退出的swp文件处理方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/30/vim不正常退出的swp文件处理方法/" class="article-date">
+  <time datetime="2019-08-30T13:56:47.000Z" itemprop="datePublished">2019-08-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vim不正常退出的swp文件处理方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Vim编辑器编辑文件，文件发生改变但未正常保存（断电，掉线）的时候，系统会生成保存当时更改的swp文件</p>
+<blockquote>
+<p>使用Vim编辑器编辑文件，文件发生改变但未正常保存（断电，掉线）的时候，linux系统会自动帮你保存一定的更改”以防不测“（这点设计的挺好的）的swp文件，其他产生swp文件的场景：</p>
+</blockquote>
+<ol>
+<li>非正常退出</li>
+<li>当你用多个程序或进程编辑同一文件时（多人同时使用服务器编辑同一个文件）</li>
+</ol>
+<p>生成的<strong>swp文件</strong>属于<strong>隐藏文件</strong>，可以使用命令 查看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -a</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5C24186%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567215306227.png" alt="1567215306227"></p>
+<p>当你再次编辑文件时，</p>
+<p><img src="C:%5CUsers%5C24186%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567215499798.png" alt="1567215499798"></p>
+<p>会看到图示提示</p>
+<p><img src="C:%5CUsers%5C24186%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567215520970.png" alt="1567215520970"></p>
+<p>q 退出  r  恢复  d 删除这个swp文件  o  打开只读模式</p>
+<blockquote>
+<p>恢复文件是指恢复你以前的进度，不包括swp保存的进度（考虑好再选择是否恢复）。</p>
+</blockquote>
+<p>如果不想在每次进入的时候看到这个界面，可以在终端恢复文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi -r flename</span><br></pre></td></tr></table></figure>
+
+<p>再删除”交换文件”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm .filename.swp</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/30/vim不正常退出的swp文件处理方法/" data-id="cjzyxtlo20002g4vmwijszlsy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux-Vim/">Linux  Vim</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/28/linux下导入导出mysql数据/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">linux下导入导出mysql数据</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Vim/">Linux  Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Mysql/">Linux Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日常问题记录/">日常问题记录</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Linux-Vim/" style="font-size: 10px;">Linux  Vim</a> <a href="/tags/Linux-Mysql/" style="font-size: 10px;">Linux Mysql</a> <a href="/tags/日常问题记录/" style="font-size: 10px;">日常问题记录</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/08/30/vim不正常退出的swp文件处理方法/">vim不正常退出的swp文件处理方法</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/28/linux下导入导出mysql数据/">linux下导入导出mysql数据</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/11/j的缺失/">&#39;j的缺失&#39;</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/10/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 lizefeng<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
